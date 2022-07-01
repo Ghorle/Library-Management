@@ -1,0 +1,14 @@
+<div id="<%= dom_id book %>">
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h4 class="card-title"><%= book.title %></h4>
+    <h6 class="card-subtitle mb-2 text-muted"><%= book.published_at %> | <%= book.language %></h6>
+    <p class="card-text"><strong>Library:</strong><%= book.library_id %> | <strong>Author:</strong><%= book.author_id %></p>
+    <%= link_to "Show this book", book, class:"btn btn-info" %>
+  </div>
+</div>
+  <br/>
+</div>  
+
+
+

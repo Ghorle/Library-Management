@@ -1,0 +1,52 @@
+<% if user_signed_in? %>
+<h1>Library</h1>
+<h5>Total number of books <%
+  num = 0
+  @books.each do |book|
+    num = num + 1
+  end
+%><%= num %></h5>
+<br>
+<div id="libraries">
+<table class="table table-striped">
+  <thead class="table-dark">
+    <tr>
+      <th>Name</th>
+      <th>Opened at</th>
+      <th>Closed at</th>
+      <th>No. of Books</th>
+      <th></th>
+      <th></th>
+    <tbody>
+    <% @libraries.each do |library| %>
+      <tr>
+        <td><%= library.name %></td>
+        <td><%= library.opening_time.strftime("%I:%M %p") %></td>
+        <td><%= library.closing_time.strftime("%I:%M %p") %></td>
+        <td>
+          <% nbook = 0 %>
+          <% @books.each do |book| %>
+            <% if library.id == book.library_id %>
+              <% nbook = nbook + 1 %>
+            <% end %>
+          <% end %>
+          <%= nbook %>
+        </td>
+        <td><%= link_to "Show", library, class:"btn btn-success" %></td>
+        <td><%= button_to "Delete", library, method: :delete, class:"btn btn-danger" %></td>
+      </tr>
+    <% end %>
+
+    </tbody>
+  </table>
+  </div>
+  <%= link_to "New Library", new_library_path, class:"btn btn-success" %>
+
+<% else %>
+    <br>
+    <h1>Please Sign Up or Sign In.</h1>
+  <% end %>
+
+
+
+

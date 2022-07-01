@@ -1,0 +1,42 @@
+<div class="jumbotron">
+
+<h1><%= @library.name %></h1>
+<% nbook = 0 %>
+<% @books.each do |book| %>
+  <% if @library.id == book.library_id %>
+    <% nbook = nbook + 1 %>
+  <% end %>
+<% end %>
+<span style="font-size: 18px;"><b>Number of Books </b><%= nbook %></span>
+<br><br>
+<p>
+  <b>Opening Time</b> <%= @library.opening_time.strftime("%I:%M %p") %><br>
+  <b>Closing Time</b> <%= @library.closing_time.strftime("%I:%M %p") %>
+</p>
+<br>
+<div>
+  <%= link_to "Edit Library", edit_library_path(@library), class:"btn btn-success" %> | 
+  <%= link_to "Back to Libraries", libraries_path, class:"btn btn-dark" %>
+  <p><%= button_to "Delete Library", @library, method: :delete, class:"btn btn-danger" %></p>
+</div>
+</div>
+
+
+
+<% if @book.library_id == @library.id %>
+<div id="<%= dom_id @book %>">
+<% @books.each do |book| %>
+  <div class="col-md-4">
+<div class="card" style="width: 100%;">
+  <div class="card-body">
+    <h4 class="card-title"><%= book.title %></h4>
+    <h6 class="card-subtitle mb-2 text-muted"><%= book.published_at %> | <%= book.language %></h6>
+    <p class="card-text"><strong>Library:</strong><%= book.library_id %> | <strong>Author:</strong><%= book.author_id %></p>
+    <%= link_to "Show this book", book, class:"btn btn-info" %>
+  </div>
+</div>
+  <br/>
+  </div>
+  <% end %>
+</div>  
+<% end %>

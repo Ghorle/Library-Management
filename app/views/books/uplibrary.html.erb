@@ -1,0 +1,8 @@
+<% @books.each do |book| %>
+	<% if book.id.to_i == params[:book].to_i %>
+		<% updatebook = book %>
+		<h3>Are you sure?</h3>
+		<%= render "uplibraryid", book: updatebook %>
+		<%= link_to "Cancel", root_path, class:"btn btn-dark" %>
+	<% end %>
+<% end %>
