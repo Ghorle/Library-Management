@@ -41,6 +41,9 @@
   </table>
   </div>
   <%= link_to "New Library", new_library_path, class:"btn btn-success" %>
+  <% if current_user.admin? %>
+   | <%= link_to "All Books", books_path, class:"btn btn-success" %>
+  <% end %>
 
 <% else %>
     <br>

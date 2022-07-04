@@ -27,8 +27,7 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :library_id %>
-    <%= f.number_field :library_id, value: 0, class:"form-control", placeholder:"Library Id" %>
+    <%= f.number_field :library_id, value: 0, class:"form-control", placeholder:"Library Id", type: :hidden %>
   </div>
 
   <div class="form-group">
@@ -49,7 +48,7 @@
   <%= f.label "Author", for: "selectauth" %>
   <select class="form-control" id="selectauth" required onchange="updateauth()">
   <% @users.each do |author| %>
-      <option value="<%= author.id %>"><%= author.id %></option>
+      <option value="<%= author.id %>"><%= author.name %></option>
   <% end %>
 </select>
 </div>

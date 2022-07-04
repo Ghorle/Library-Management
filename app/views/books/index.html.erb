@@ -1,6 +1,7 @@
 <h1>Books</h1>
 
-<%= link_to "New book", new_book_path, class:"btn btn-success" %>
+<%= link_to "New book", new_book_path, class:"btn btn-success" %> | 
+<%= link_to "Back to Libraries", libraries_path, class:"btn btn-dark" %>
 <br/><br/>
 <%= render @books %>
 

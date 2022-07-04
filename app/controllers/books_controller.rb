@@ -1,6 +1,7 @@
 class BooksController < ApplicationController
   before_action :set_book, only: %i[ show edit update destroy ]
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :admin_create, only: [:create, :edit, :update, :destroy]
 
   # GET /books or /books.json
   def index
@@ -72,6 +73,15 @@ class BooksController < ApplicationController
       format.html { redirect_to books_url, notice: "Book was Successfully Deleted." }
       format.json { head :no_content }
     end
+  end
+
+  def admin_create
+    if !current_user.admin?
+      @library = nil
+    else
+      @library = true
+    end
+    redirect_to libraries_path, notice: "You are not Admin. Please try with Admin account." if @library.nil?
   end
 
   private

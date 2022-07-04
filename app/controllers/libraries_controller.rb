@@ -3,6 +3,7 @@ class LibrariesController < ApplicationController
   before_action :set_book, only: %i[ show ]
   before_action :authenticate_user!, except: [:index]
   before_action :correct_user, only: [:edit, :update, :destroy, :show]
+  before_action :admin_create, only: [:create]
 
   # GET /libraries or /libraries.json
   def index
@@ -12,6 +13,8 @@ class LibrariesController < ApplicationController
 
   # GET /libraries/1 or /libraries/1.json
   def show
+    @users = User.all
+    @libraries = Library.all
     @books = Book.where(library_id: @library.id)
   end
 
@@ -65,8 +68,17 @@ class LibrariesController < ApplicationController
   def correct_user
     if user_signed_in?
       @library = current_user.libraries.find_by(id: params[:id])
-      redirect_to libraries_path, notice: "Not Athorized for this Library." if @library.nil?
+      redirect_to libraries_path, notice: "Not Athorized." if @library.nil?
     end
+  end
+
+  def admin_create
+    if !current_user.admin?
+      @library = nil
+    else
+      @library = true
+    end
+    redirect_to libraries_path, notice: "You are not Admin. Please try with Admin account." if @library.nil?
   end
 
   private
@@ -84,4 +96,4 @@ class LibrariesController < ApplicationController
       params.require(:library).permit(:name, :opening_time, :closing_time, :user_id)
     end
 end
-  
+   

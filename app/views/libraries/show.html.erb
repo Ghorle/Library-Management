@@ -13,16 +13,18 @@
   <b>Opening Time</b> <%= @library.opening_time.strftime("%I:%M %p") %><br>
   <b>Closing Time</b> <%= @library.closing_time.strftime("%I:%M %p") %>
 </p>
-<br>
+<br/>
 <div>
   <%= link_to "Edit Library", edit_library_path(@library), class:"btn btn-success" %> | 
   <%= link_to "Back to Libraries", libraries_path, class:"btn btn-dark" %>
   <p><%= button_to "Delete Library", @library, method: :delete, class:"btn btn-danger" %></p>
 </div>
+<br>
 </div>
 
-
-
+<h2>Books</h2>
+<%= link_to "Add New Book", new_book_path, class:"btn btn-success" %> 
+<p>
 <% if @book.library_id == @library.id %>
 <div id="<%= dom_id @book %>">
 <% @books.each do |book| %>
@@ -40,3 +42,4 @@
   <% end %>
 </div>  
 <% end %>
+</p>
